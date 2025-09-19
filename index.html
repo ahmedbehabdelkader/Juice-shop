@@ -1,0 +1,734 @@
+
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عصائر و آيس كريم طازج</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff6b35, #f7931e, #4caf50);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .menu-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            background: #4caf50;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .natural-badge {
+            background: #4caf50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-right: 4px solid transparent;
+            gap: 15px;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-right: 4px solid #4caf50;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.1);
+            border-color: #4caf50;
+        }
+
+        .item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-width: 0;
+            gap: 8px;
+        }
+
+        .item-name {
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-right: 10px;
+            word-wrap: break-word;
+        }
+
+        .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            min-width: 60px;
+        }
+
+        .size-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .size-option.small {
+            background: linear-gradient(45deg, #4caf50, #45a049);
+        }
+
+        .size-option.medium {
+            background: linear-gradient(45deg, #ff9800, #f57c00);
+        }
+
+        .size-option.large {
+            background: linear-gradient(45deg, #f44336, #d32f2f);
+        }
+
+        .item-price {
+            display: none; /* Hide old single price */
+        }
+
+        .ice-cream-section {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ice-cream-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .qr-placeholder {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .menu-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                padding: 12px 15px;
+            }
+
+            .menu-item {
+                padding: 12px;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .item-image {
+                width: 50px;
+                height: 50px;
+            }
+
+            .item-details {
+                gap: 6px;
+            }
+
+            .size-options {
+                justify-content: flex-end;
+                width: 100%;
+            }
+
+            .size-option {
+                padding: 5px 10px;
+                font-size: 0.8rem;
+                min-width: 50px;
+            }
+
+            .item-name {
+                font-size: 1rem;
+                margin-right: 0;
+            }
+
+            .item-price {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                align-self: flex-end;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .menu-section {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
+            }
+
+            .menu-item {
+                padding: 10px;
+                gap: 10px;
+            }
+
+            .item-image {
+                width: 45px;
+                height: 45px;
+            }
+
+            .item-details {
+                gap: 4px;
+            }
+
+            .size-option {
+                padding: 4px 8px;
+                font-size: 0.75rem;
+                min-width: 45px;
+            }
+
+            .item-name {
+                font-size: 0.9rem;
+            }
+
+            .item-price {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🍦 عصائر طازجة و آيس كريم 🥤</h1>
+            <p class="subtitle">Fresh Juice ★ Ice Cream</p>
+        </header>
+
+        <div class="menu-grid">
+            <!-- Tea Section -->
+            <section class="menu-section">
+                <h2 class="section-title">الشاي</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=120&h=120&fit=crop&crop=center" alt="شاي" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">شاي</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 5</button>
+                                <button class="size-option medium">وسط: 8</button>
+                                <button class="size-option large">كبير: 12</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=120&h=120&fit=crop&crop=center" alt="شاي أحمر" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">شاي أحمر</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 10</button>
+                                <button class="size-option medium">وسط: 15</button>
+                                <button class="size-option large">كبير: 20</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=120&h=120&fit=crop&crop=center" alt="شاي بلبن" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">شاي بلبن</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 12</button>
+                                <button class="size-option medium">وسط: 18</button>
+                                <button class="size-option large">كبير: 25</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1597318181409-cf64b61734f2?w=120&h=120&fit=crop&crop=center" alt="أعشاب الساحة" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">أعشاب الساحة</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 15</button>
+                                <button class="size-option medium">وسط: 20</button>
+                                <button class="size-option large">كبير: 28</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1609501676725-7186f4f3d0ac?w=120&h=120&fit=crop&crop=center" alt="ينسون" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">ينسون</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 10</button>
+                                <button class="size-option medium">وسط: 15</button>
+                                <button class="size-option large">كبير: 20</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=120&h=120&fit=crop&crop=center" alt="نعناع" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">نعناع</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 10</button>
+                                <button class="size-option medium">وسط: 15</button>
+                                <button class="size-option large">كبير: 20</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1506084868230-bb9d95c24759?w=120&h=120&fit=crop&crop=center" alt="قرفة" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قرفة</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 20</button>
+                                <button class="size-option medium">وسط: 25</button>
+                                <button class="size-option large">كبير: 35</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1518869175068-2cbfae321e0e?w=120&h=120&fit=crop&crop=center" alt="جنزبيل" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">جنزبيل</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 20</button>
+                                <button class="size-option medium">وسط: 25</button>
+                                <button class="size-option large">كبير: 35</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1597318181409-cf64b61734f2?w=120&h=120&fit=crop&crop=center" alt="حلبة" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">حلبة</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 20</button>
+                                <button class="size-option medium">وسط: 25</button>
+                                <button class="size-option large">كبير: 35</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Coffee Section -->
+            <section class="menu-section">
+                <h2 class="section-title">القهوة</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&h=120&fit=crop&crop=center" alt="اسبريسو شوكولاته" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسبريسو شوكولاته</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=120&h=120&fit=crop&crop=center" alt="قهوة تركي" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة تركي</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop&crop=center" alt="قهوة فرنساوي" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة فرنساوي</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&h=120&fit=crop&crop=center" alt="قهوة سكر" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة سكر</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 15</button>
+                                <button class="size-option medium">وسط: 22</button>
+                                <button class="size-option large">كبير: 30</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=120&h=120&fit=crop&crop=center" alt="اسكافيه بلبن" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه بلبن</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 20</button>
+                                <button class="size-option medium">وسط: 28</button>
+                                <button class="size-option large">كبير: 38</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=120&h=120&fit=crop&crop=center" alt="اسكافيه سادة" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه سادة</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=120&h=120&fit=crop&crop=center" alt="اسكافيه نكهات" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه نكهات</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=120&h=120&fit=crop&crop=center" alt="كابتشينو نكهات" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">كابتشينو نكهات</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=120&h=120&fit=crop&crop=center" alt="موكا" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">موكا</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Coffee Section -->
+            <section class="menu-section">
+                <h2 class="section-title">عصائر طبيعية</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=120&h=120&fit=crop&crop=center" alt="اسبريسو شوكولاته" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسبريسو شوكولاته</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=120&h=120&fit=crop&crop=center" alt="قهوة تركي" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة تركي</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=120&h=120&fit=crop&crop=center" alt="قهوة فرنساوي" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة فرنساوي</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=120&h=120&fit=crop&crop=center" alt="قهوة سكر" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">قهوة سكر</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 15</button>
+                                <button class="size-option medium">وسط: 22</button>
+                                <button class="size-option large">كبير: 30</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=120&h=120&fit=crop&crop=center" alt="اسكافيه بلبن" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه بلبن</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 20</button>
+                                <button class="size-option medium">وسط: 28</button>
+                                <button class="size-option large">كبير: 38</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=120&h=120&fit=crop&crop=center" alt="اسكافيه سادة" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه سادة</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 45</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=120&h=120&fit=crop&crop=center" alt="اسكافيه نكهات" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">اسكافيه نكهات</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=120&h=120&fit=crop&crop=center" alt="كابتشينو نكهات" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">كابتشينو نكهات</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=120&h=120&fit=crop&crop=center" alt="موكا" class="item-image">
+                        <div class="item-details">
+                            <span class="item-name">موكا</span>
+                            <div class="size-options">
+                                <button class="size-option small">صغير: 25</button>
+                                <button class="size-option medium">وسط: 35</button>
+                                <button class="size-option large">كبير: 48</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+        <footer class="footer">
+            <div class="contact-info">
+                📞 تابعونا على صفحتنا
+                <br>
+                مكة - عصائر و آيس كريم
+            </div>
+            <div class="qr-placeholder">QR Code</div>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth scrolling animation when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.menu-section');
+            
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                observer.observe(section);
+            });
+        });
+
+        // Add CSS animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
